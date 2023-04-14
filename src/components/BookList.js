@@ -1,9 +1,9 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 const cover = "https://images-eu.ssl-images-amazon.com/images/I/91bYsX41DVL._AC_UL600_SR600,400_.jpg"
 const title = "Atomic Habits";
 const Author = "James Clear";
-const price =50;
+const price = 50;
 
 const BookObject = [
     {
@@ -42,10 +42,15 @@ const BookList = () => {
 export const Book = ({ cover, title, author }) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [cartCount, setCartCount] = useState(0);
-  
+
     const handleAddToCart = () => {
-      setAddedToCart(true);
-      setCartCount(cartCount + 1);
+        setAddedToCart(true);
+        setCartCount(cartCount + 1);
+    }
+
+    const handleRemoveFromCart = () => {
+        setAddedToCart(false);
+        setCartCount(cartCount - 1);
     }
 
     return (
@@ -56,7 +61,9 @@ export const Book = ({ cover, title, author }) => {
             <h4>{author}</h4>
             <p>${price}</p>
             {!addedToCart && <button onClick={handleAddToCart} type="button" class="btn btn-dark">Add to cart</button>}
-            {addedToCart && <button disabled type="button" class="btn btn-dark">Added to cart</button>}
+            {addedToCart && (<>
+          <button onClick={handleRemoveFromCart} type="button" class="btn btn-dark">Remove from cart</button>
+        </>)}
             <p>{cartCount}</p>
         </article>
     )
